@@ -27,7 +27,7 @@ export function Navigation() {
               <Package className="h-4 w-4 text-primary-foreground" />
             </div>
             <div>
-              <h2 className="font-semibold text-foreground">내 물건 찾기</h2>
+              <h2 className="font-semibold text-foreground">와츠인마이</h2>
               <p className="text-xs text-muted-foreground">냉장고 & 서랍 관리</p>
             </div>
           </div>
