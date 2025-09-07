@@ -5,6 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import { Badge } from "~/components/ui/badge"
 import { Package, Plus, Clock, AlertTriangle, Refrigerator, Archive, ChevronRight } from "lucide-react"
 import { Link } from "react-router"
+import { getStorages } from "./queries"
+import type { Route } from "./+types/page"
+
+export const loader = async () => {
+  const storages = await getStorages();
+  return { storages };
+}
 
 // Mock data - 실제로는 API에서 가져올 데이터
 const storageList = [
@@ -84,7 +91,7 @@ const recentItems = [
   },
 ]
 
-export default function DashboardPage() {
+export default function DashboardPage({loaderData}: Route.ComponentProps) {
   return (
     <div className="min-h-screen bg-background pb-20">
       <Header title="내 보관함" />
@@ -167,41 +174,42 @@ export default function DashboardPage() {
           </div>
 
           <div className="space-y-3">
-            {storageList.map((storage) => (
-              <Link key={storage.id} to={`/storage/${storage.id}`}>
+            {loaderData.storages.map((storages) => (
+              <Link key={storages.id} to={`/storage/${storages.id}`}>
                 <Card className="hover:shadow-md transition-shadow">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
                       <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center overflow-hidden">
                         <img
-                          src={storage.image || "/placeholder.svg"}
-                          alt={storage.name}
+                          src={storages.photo_url || "/placeholder.svg"}
+                          alt={storages.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-semibold text-sm truncate">{storage.name}</h3>
-                          {storage.type === "refrigerator" && (
+                          <h3 className="font-semibold text-sm truncate">{storages.name}</h3>
+                          {storages.type === "FRIDGE" && (
                             <Refrigerator className="h-3 w-3 text-muted-foreground" />
                           )}
-                          {storage.type === "drawer" && <Archive className="h-3 w-3 text-muted-foreground" />}
-                          {storage.type === "cabinet" && <Package className="h-3 w-3 text-muted-foreground" />}
+                          {storages.type === "DRAWER" && <Archive className="h-3 w-3 text-muted-foreground" />}
+                          {storages.type === "CABINET" && <Package className="h-3 w-3 text-muted-foreground" />}
                         </div>
 
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-2">
-                          <span>{storage.itemCount}개 물건</span>
+                        {/*Todo: itemCount, lastUpdated, expiringCount 추가 필요*/}
+                        {/* <div className="flex items-center gap-4 text-xs text-muted-foreground mb-2">
+                          <span>{storages.itemCount}개 물건</span>
                           <span>•</span>
-                          <span>{storage.lastUpdated}</span>
-                        </div>
+                          <span>{storages.created_at}</span>
+                        </div> */}
 
-                        {storage.expiringCount > 0 && (
+                        {/* {storages.expiring_count > 0 && (
                           <div className="flex items-center gap-1">
                             <Clock className="h-3 w-3 text-accent" />
-                            <span className="text-xs text-accent font-medium">{storage.expiringCount}개 임박</span>
+                            <span className="text-xs text-accent font-medium">{storages.expiring_count}개 임박</span>
                           </div>
-                        )}
+                        )} */}
                       </div>
 
                       <ChevronRight className="h-4 w-4 text-muted-foreground" />
