@@ -12,5 +12,7 @@ export default [
   { path: "admin", file: "routes/admin/page.tsx" },
   { path: "storage/new", file: "routes/storage/new/page.tsx" },
   { path: "storage/:id", file: "routes/storage/[id]/page.tsx" },
-  { path: "storage/:id/item/:itemId", file: "routes/storage/[id]/item/[itemId]/page.tsx" }
+  { path: "storage/:id/item/:itemId", file: "routes/storage/[id]/item/[itemId]/page.tsx" },
+  { path: "auth/social/kakao/start", file: "routes/auth/social/kakao/start.tsx" },
+  { path: "auth/social/kakao/complete", file: "routes/auth/social/kakao/complete.tsx" }
 ] satisfies RouteConfig;

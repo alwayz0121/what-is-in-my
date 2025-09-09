@@ -3,6 +3,7 @@ import { Button } from "~/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card"
 import { Package } from "lucide-react"
 import { Link } from "react-router"
+import { browserClient } from "~/supa-client"
 
 export default function SignUpPage() {
   return (
@@ -29,9 +30,23 @@ export default function SignUpPage() {
             <Button 
               className="w-full h-11 text-base font-semibold bg-[#FEE500] hover:bg-[#FEE500]/90 text-black" 
               type="button"
-              onClick={() => {
-                // 카카오 로그인 로직 구현
-                console.log('카카오 로그인 클릭')
+              onClick={async () => {
+                try {
+                  const { data, error } = await browserClient.auth.signInWithOAuth({
+                    provider: 'kakao',
+                    options: {
+                      redirectTo: `${window.location.origin}/dashboard`
+                    }
+                  });
+                  
+                  if (error) {
+                    console.error('카카오 로그인 오류:', error);
+                    alert('로그인 중 오류가 발생했습니다.');
+                  }
+                } catch (err) {
+                  console.error('카카오 로그인 오류:', err);
+                  alert('로그인 중 오류가 발생했습니다.');
+                }
               }}
             >
               <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="none">
