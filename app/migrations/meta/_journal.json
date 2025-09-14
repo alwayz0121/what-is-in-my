@@ -15,6 +15,13 @@
       "when": 1756909314668,
       "tag": "0001_thankful_red_shift",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757835296935,
+      "tag": "0002_vengeful_masked_marvel",
+      "breakpoints": true
     }
   ]
 }

@@ -14,35 +14,91 @@ export type Database = {
   }
   public: {
     Tables: {
+      item_history: {
+        Row: {
+          action: string
+          action_date: string
+          created_at: string
+          details: string | null
+          id: string
+          item_id: string
+        }
+        Insert: {
+          action: string
+          action_date: string
+          created_at?: string
+          details?: string | null
+          id?: string
+          item_id: string
+        }
+        Update: {
+          action?: string
+          action_date?: string
+          created_at?: string
+          details?: string | null
+          id?: string
+          item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "item_history_item_id_items_id_fk"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       items: {
         Row: {
+          added_date: string | null
+          category: string | null
           created_at: string
-          expiration_date: string | null
+          description: string | null
+          expiry_date: string | null
           id: string
           is_consumed: boolean
+          is_expired: boolean
           name: string
           quantity: number
+          section_id: string | null
+          section_name: string | null
           storage_id: string
+          unit: string | null
           updated_at: string
         }
         Insert: {
+          added_date?: string | null
+          category?: string | null
           created_at?: string
-          expiration_date?: string | null
+          description?: string | null
+          expiry_date?: string | null
           id?: string
           is_consumed?: boolean
+          is_expired?: boolean
           name: string
           quantity?: number
+          section_id?: string | null
+          section_name?: string | null
           storage_id: string
+          unit?: string | null
           updated_at?: string
         }
         Update: {
+          added_date?: string | null
+          category?: string | null
           created_at?: string
-          expiration_date?: string | null
+          description?: string | null
+          expiry_date?: string | null
           id?: string
           is_consumed?: boolean
+          is_expired?: boolean
           name?: string
           quantity?: number
+          section_id?: string | null
+          section_name?: string | null
           storage_id?: string
+          unit?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -128,44 +184,38 @@ export type Database = {
       }
       storages: {
         Row: {
-          color_hex: string | null
           created_at: string
+          expiring_count: number
           id: string
-          image_height: number | null
-          image_width: number | null
-          is_archived: boolean
+          image: string | null
+          item_count: number
+          last_updated: string | null
           name: string
-          photo_url: string | null
-          room: string | null
-          type: Database["public"]["Enums"]["storage_type"]
+          type: string
           updated_at: string
           user_id: string
         }
         Insert: {
-          color_hex?: string | null
           created_at?: string
+          expiring_count?: number
           id?: string
-          image_height?: number | null
-          image_width?: number | null
-          is_archived?: boolean
+          image?: string | null
+          item_count?: number
+          last_updated?: string | null
           name: string
-          photo_url?: string | null
-          room?: string | null
-          type?: Database["public"]["Enums"]["storage_type"]
+          type?: string
           updated_at?: string
           user_id: string
         }
         Update: {
-          color_hex?: string | null
           created_at?: string
+          expiring_count?: number
           id?: string
-          image_height?: number | null
-          image_width?: number | null
-          is_archived?: boolean
+          image?: string | null
+          item_count?: number
+          last_updated?: string | null
           name?: string
-          photo_url?: string | null
-          room?: string | null
-          type?: Database["public"]["Enums"]["storage_type"]
+          type?: string
           updated_at?: string
           user_id?: string
         }
@@ -205,13 +255,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      storage_type:
-        | "FRIDGE"
-        | "FREEZER"
-        | "DRAWER"
-        | "SHELF"
-        | "CABINET"
-        | "OTHER"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -338,15 +382,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      storage_type: [
-        "FRIDGE",
-        "FREEZER",
-        "DRAWER",
-        "SHELF",
-        "CABINET",
-        "OTHER",
-      ],
-    },
+    Enums: {},
   },
 } as const
