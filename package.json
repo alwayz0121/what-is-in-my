@@ -10,7 +10,10 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "db:typegen": "npx supabase gen types typescript --project-id fgtkveogksfnfanhdzzn --schema public > database.types.ts"
+    "db:typegen": "npx supabase gen types typescript --project-id fgtkveogksfnfanhdzzn --schema public > database.types.ts",
+    "apply-rls": "tsx scripts/apply-rls-policies.ts apply",
+    "remove-rls": "tsx scripts/apply-rls-policies.ts remove",
+    "check-rls": "tsx scripts/apply-rls-policies.ts check"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -46,8 +49,10 @@
     "@types/node": "^20",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "dotenv": "^17.2.2",
     "drizzle-kit": "^0.31.4",
     "tailwindcss": "^4.1.12",
+    "tsx": "^4.20.5",
     "tw-animate-css": "^1.3.7",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
