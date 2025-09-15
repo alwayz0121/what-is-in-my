@@ -9,7 +9,7 @@ import {
     varchar,
     date,
   } from "drizzle-orm/pg-core";
-import { storages } from "~/routes/storage/schema";
+import { storages, sections } from "~/routes/storage/schema";
 
 export const items = pgTable(
     "items",
@@ -33,8 +33,9 @@ export const items = pgTable(
       added_date: date("added_date"), // 추가일
       
       // 위치 정보
-      section_id: uuid("section_id"), // 섹션 ID (선택사항)
-      section_name: varchar("section_name", { length: 100 }), // 섹션 이름
+      section_id: uuid("section_id")
+        .references(() => sections.id, { onDelete: "set null" }), // 섹션 ID (선택사항)
+      section_name: varchar("section_name", { length: 100 }), // 섹션 이름 (캐시용)
       
       // 상태 관리
       is_consumed: boolean("is_consumed").default(false).notNull(),

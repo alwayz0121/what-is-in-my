@@ -103,6 +103,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "items_section_id_sections_id_fk"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "sections"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "items_storage_id_storages_id_fk"
             columns: ["storage_id"]
             isOneToOne: false
@@ -182,6 +189,38 @@ export type Database = {
           },
         ]
       }
+      sections: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          storage_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          storage_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          storage_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sections_storage_id_storages_id_fk"
+            columns: ["storage_id"]
+            isOneToOne: false
+            referencedRelation: "storages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       storages: {
         Row: {
           created_at: string
@@ -191,6 +230,7 @@ export type Database = {
           item_count: number
           last_updated: string | null
           name: string
+          section_count: number
           type: string
           updated_at: string
           user_id: string
@@ -203,6 +243,7 @@ export type Database = {
           item_count?: number
           last_updated?: string | null
           name: string
+          section_count?: number
           type?: string
           updated_at?: string
           user_id: string
@@ -215,6 +256,7 @@ export type Database = {
           item_count?: number
           last_updated?: string | null
           name?: string
+          section_count?: number
           type?: string
           updated_at?: string
           user_id?: string

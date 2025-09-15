@@ -1,0 +1,1 @@
+ALTER TABLE "storages" ADD COLUMN "section_count" integer DEFAULT 0 NOT NULL;
