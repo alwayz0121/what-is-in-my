@@ -13,7 +13,8 @@
     "db:typegen": "npx supabase gen types typescript --project-id fgtkveogksfnfanhdzzn --schema public > database.types.ts",
     "apply-rls": "tsx scripts/apply-rls-policies.ts apply",
     "remove-rls": "tsx scripts/apply-rls-policies.ts remove",
-    "check-rls": "tsx scripts/apply-rls-policies.ts check"
+    "check-rls": "tsx scripts/apply-rls-policies.ts check",
+    "test:expiry-check": "tsx scripts/test-expiry-check.ts"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",

@@ -14,5 +14,6 @@ export default [
   { path: "storage/:id", file: "routes/storage/[id]/page.tsx" },
   { path: "storage/:id/item/:itemId", file: "routes/storage/[id]/item/[itemId]/page.tsx" },
   { path: "auth/social/kakao/start", file: "routes/auth/social/kakao/start.tsx" },
-  { path: "auth/social/kakao/complete", file: "routes/auth/social/kakao/complete.tsx" }
+  { path: "auth/social/kakao/complete", file: "routes/auth/social/kakao/complete.tsx" },
+  { path: "api/cron/expiry-check", file: "routes/api/cron/expiry-check.ts" }
 ] satisfies RouteConfig;
